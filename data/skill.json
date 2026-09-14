@@ -1,0 +1,8 @@
+[
+    { "name": "HTML", "percentage": 100 },
+    { "name": "CSS", "percentage": 75 },
+    { "name": "JavaScript", "percentage": 65 },
+    { "name": "Bootstrap", "percentage": 100 },
+    { "name": "Laravel", "percentage": 75 },
+    { "name": "PHP", "percentage": 50 }
+]

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet" />
+    <title>Bootstrap Example</title>
+
+
+</head>
+
+<body>
+
+    <section class="mt-1">
+        <div class="container bg-dark p-4 mb-3 rounded text-success h-auto">
+            <div class="row">
+                <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                    <img src="images/profile.webp" class="rounded-circle border border-success" alt=""
+                        style="width: 200px; height: 200px" />
+                    <h5 class="text-center mt-3">Simple List</h5>
+                    <p class="text-center">This is a simple list example</p>
+                    <div id="simple-list-example"
+                        class="d-flex flex-column gap-2 simple-list-example-scrollspy text-center">
+                        <a class="p-1 rounded text-decoration-none text-success" href="#simple-list-item-0">Home</a>
+                        <a class="p-1 rounded text-decoration-none text-success" href="#simple-list-item-1">About</a>
+                        <a class="p-1 rounded text-decoration-none text-success" href="#simple-list-item-2">Skill</a>
+                        <a class="p-1 rounded text-decoration-none text-success" href="#simple-list-item-3">Service</a>
+                        <a class="p-1 rounded text-decoration-none text-success"
+                            href="#simple-list-item-4">Education</a>
+                        <a class="p-1 rounded text-decoration-none text-success" href="#simple-list-item-5">Project</a>
+                        <a class="p-1 rounded text-decoration-none text-success" href="#simple-list-item-6">Contact</a>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0"
+                        data-bs-smooth-scroll="true" class="scrollspy-example overflow-auto p-3" tabindex="0"
+                        style="height: 900px; position: relative">
+
+                        <!-- hero section -->
+                        <div class="col" id="simple-list-item-0" x-data="userInfoApp">
+                            <div class="card h-100 border-success bg-dark text-success mb-3">
+
+                                <!-- Shows content once userinfo is loaded -->
+                                <template x-if="userinfo">
+                                    <div class="card-body mt-5">
+                                        <h1 class="card-title">Hi, I'm <span x-text="userinfo.name"></span></h1>
+                                        <p class="card-text" x-text="userinfo.desicnation"></p>
+
+                                        <div class="col mt-5 mb-5">
+                                            <a :href="userinfo.cv || '#'" download class="btn btn-outline-success me-2"
+                                                :class="{ 'disabled': !userinfo.cv }">Download CV</a>
+                                            <a :href="userinfo.resume || '#'" download
+                                                class="btn btn-outline-success me-2"
+                                                :class="{ 'disabled': !userinfo.resume }">Download Resume</a>
+                                            <a href="#simple-list-item-6" class="btn btn-outline-success">Contact Me</a>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                <!-- Loading fallback -->
+                                <template x-if="!userinfo">
+                                    <div class="card-body mt-5 text-center">
+                                        <p>Loading user data...</p>
+                                    </div>
+                                </template>
+
+                            </div>
+                        </div>
+
+                        <!-- About Us section -->
+                        <div class="mt-3" id="simple-list-item-1" x-data="aboutApp">
+                            <h4 class="fw-bold">About Me</h4>
+                            <div class="col mt-3">
+                                <div class="card bg-dark text-success border-success">
+
+                                    <!-- Load card content when data exists -->
+                                    <template x-if="about">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fw-bold" x-text="about.title"></h5>
+                                            <p class="card-text" x-text="about.content"></p>
+                                        </div>
+                                    </template>
+
+                                    <!-- Fallback loading inside the exact same card -->
+                                    <template x-if="!about">
+                                        <div class="card-body text-center">
+                                            <p class="mb-0">Loading about details...</p>
+                                        </div>
+                                    </template>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills section -->
+                        <div class="mt-3" id="simple-list-item-2" x-data="skillsApp">
+                            <h4 class="fw-bold">Skills</h4>
+                            <div class="card bg-dark border-success mt-4 m-auto">
+                                <div class="card-body text-success">
+
+                                    <!-- Loop through skills array when loaded -->
+                                    <template x-for="skill in skills" :key="skill.name">
+                                        <div class="mt-3">
+                                            <h5 x-text="skill.name + ':'"></h5>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                                    role="progressbar" :aria-valuenow="skill.percentage"
+                                                    aria-valuemin="0" aria-valuemax="100"
+                                                    :style="`width: ${skill.percentage}%`"
+                                                    x-text="skill.percentage + '%'">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                    <!-- Loading fallback -->
+                                    <template x-if="skills.length === 0">
+                                        <div class="text-center py-3">
+                                            <p class="mb-0">Loading skills...</p>
+                                        </div>
+                                    </template>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Services section -->
+<div class="mt-5" id="simple-list-item-3" x-data="servicesApp">
+    <h4 class="fw-bold">Services</h4>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4 mt-1">
+        
+        <!-- Use service.id for the key directive -->
+<template x-for="service in services" :key="service.id">
+    <div class="col" :id="'service-' + service.id">
+        <div class="card border-success mb-3 text-center h-100 bg-dark">
+            <img :src="service.icon" class="card-img-top p-3" :alt="service.title + ' Icon'"
+                 style="width: 80px; margin: auto" />
+            <div class="card-body text-success">
+                <h5 class="card-title" x-text="service.title"></h5>
+                <p class="card-text" x-text="service.description"></p>
+                <a :href="service.link || '#'" class="btn btn-outline-success btn-sm mt-2">Learn More</a>
+            </div>
+        </div>
+    </div>
+</template>
+
+        <!-- Loading fallback -->
+        <template x-if="services.length === 0">
+            <div class="col-12 text-center py-4 text-success">
+                <p class="mb-0">Loading services...</p>
+            </div>
+        </template>
+
+    </div>
+</div>
+
+                        <div class="mt-4" id="simple-list-item-4">
+                            <h4 class="fw-bold">Education</h4>
+                            <div class="accordion mt-3" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            Accordion Item #1
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the first item's accordion body.</strong>
+                                            It is shown by default, until the collapse plugin adds
+                                            the appropriate classes that we use to style each
+                                            element. These classes control the overall appearance,
+                                            as well as the showing and hiding via CSS transitions.
+                                            You can modify any of this with custom CSS or overriding
+                                            our default variables. It's also worth noting that just
+                                            about any HTML can go within the
+                                            <code>.accordion-body</code>, though the transition does
+                                            limit overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                            Accordion Item #2
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the second item's accordion body.</strong>
+                                            It is hidden by default, until the collapse plugin adds
+                                            the appropriate classes that we use to style each
+                                            element. These classes control the overall appearance,
+                                            as well as the showing and hiding via CSS transitions.
+                                            You can modify any of this with custom CSS or overriding
+                                            our default variables. It's also worth noting that just
+                                            about any HTML can go within the
+                                            <code>.accordion-body</code>, though the transition does
+                                            limit overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                            aria-expanded="false" aria-controls="collapseThree">
+                                            Accordion Item #3
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                        aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the third item's accordion body.</strong>
+                                            It is hidden by default, until the collapse plugin adds
+                                            the appropriate classes that we use to style each
+                                            element. These classes control the overall appearance,
+                                            as well as the showing and hiding via CSS transitions.
+                                            You can modify any of this with custom CSS or overriding
+                                            our default variables. It's also worth noting that just
+                                            about any HTML can go within the
+                                            <code>.accordion-body</code>, though the transition does
+                                            limit overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Projects section -->
+<div class="mt-4" id="simple-list-item-5" x-data="projectsApp">
+    <h4 class="fw-bold">Projects</h4>
+    <div class="row row-cols-1 row-cols-md-2 g-4 mt-1">
+        
+        <!-- Loop through projects array -->
+        <template x-for="project in projects" :key="project.id">
+            <div class="col" :id="'project-' + project.id">
+                <div class="card h-100 border-success bg-dark">
+                    <img :src="project.image" class="card-img-top" :alt="project.title" />
+                    <div class="card-body text-success">
+                        <h5 class="card-title" x-text="project.title"></h5>
+                        <p class="card-text" x-text="project.description"></p>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Fallback loading state -->
+        <template x-if="projects.length === 0">
+            <div class="col-12 text-center py-4 text-success">
+                <p class="mb-0">Loading projects...</p>
+            </div>
+        </template>
+
+    </div>
+</div>
+
+                        <div class="mt-5" id="simple-list-item-6">
+                            <h5>Contact Me</h5>
+                            <div class="col mt-3">
+                                <div class="card h-100 border-success bg-dark">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Name</label>
+                                                <input type="text"
+                                                    class="form-control bg-dark text-success border-success" id="name"
+                                                    placeholder="Enter your name" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email address</label>
+                                                <input type="email"
+                                                    class="form-control bg-dark text-success border-success" id="email"
+                                                    placeholder="Enter your email" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message" class="form-label">Message</label>
+                                                <textarea class="form-control bg-dark text-success border-success"
+                                                    id="message" rows="4" placeholder="Enter your message"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-outline-success">Send Message</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- JavaScript Dependencies & Components -->
+<script src="js/bootstrap.bundle.min.js"></script>
+
+<!-- Alpine Data Components -->
+<script src="js/user-info.js"></script>
+<script src="js/about.js"></script>
+<script src="js/skills.js"></script>
+<script src="js/services.js"></script>
+<script src="js/projects.js"></script>
+
+<!-- Alpine.js Core (Must stay after component files) -->
+<script src="js/alpine.min.js"></script>
+</body>
+
+</html>

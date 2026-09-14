@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "icon": "images/1748939653.png",
+        "title": "Web Development",
+        "description": "We provide modern, responsive, and scalable web development services tailored to your business needs.",
+        "link": "#"
+    },
+    {
+        "id": 2,
+        "icon": "images/1748939736.png",
+        "title": "Mobile App Development",
+        "description": "Custom iOS & Android apps that enhance user experience and boost engagement.",
+        "link": "#"
+    },
+    {
+        "id": 3,
+        "icon": "images/computer.webp",
+        "title": "Custom Software",
+        "description": "Tailored software solutions designed to solve your specific business challenges.",
+        "link": "#"
+    },
+    {
+        "id": 4,
+        "icon": "images/service-icon4.png",
+        "title": "Cloud Solutions",
+        "description": "Migrate to cloud securely with our expert solutions for efficiency and scalability.",
+        "link": "#"
+    }
+]

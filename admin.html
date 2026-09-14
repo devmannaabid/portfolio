@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #198754;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background-color: #1e1e1e;
+            border-right: 1px solid #198754;
+        }
+
+        .nav-link {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .nav-link.active,
+        .nav-link:hover {
+            background-color: #198754;
+            color: #fff !important;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            color: #fff;
+            border-color: #198754;
+        }
+
+        .table {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body x-data="adminDashboard">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar p-3">
+                <h3 class="text-success text-center mb-4"><i class="fa-solid fa-user-shield"></i> Admin Panel</h3>
+                <div class="nav flex-column nav-pills me-3" role="tablist">
+                    <button class="nav-link text-start" :class="{ 'active': currentTab === 'overview' }"
+                        @click="currentTab = 'overview'">
+                        <i class="fa-solid fa-chart-line me-2"></i> Overview
+                    </button>
+                    <button class="nav-link text-start" :class="{ 'active': currentTab === 'skills' }"
+                        @click="currentTab = 'skills'">
+                        <i class="fa-solid fa-code me-2"></i> Skills
+                    </button>
+                    <button class="nav-link text-start" :class="{ 'active': currentTab === 'services' }"
+                        @click="currentTab = 'services'">
+                        <i class="fa-solid fa-concierge-bell me-2"></i> Services
+                    </button>
+                    <button class="nav-link text-start" :class="{ 'active': currentTab === 'projects' }"
+                        @click="currentTab = 'projects'">
+                        <i class="fa-solid fa-diagram-project me-2"></i> Projects
+                    </button>
+                    <hr class="border-success">
+                    <a href="index.html" class="btn btn-outline-success text-start">
+                        <i class="fa-solid fa-globe me-2"></i> View Website
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="col-md-9 col-lg-10 p-4">
+
+                <!-- 1. Overview Tab -->
+                <div x-show="currentTab === 'overview'">
+                    <h2 class="fw-bold mb-4">Dashboard Overview</h2>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card p-3 text-center">
+                                <h3>Total Skills</h3>
+                                <p class="fs-1 fw-bold text-success" x-text="skills.length"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card p-3 text-center">
+                                <h3>Total Services</h3>
+                                <p class="fs-1 fw-bold text-success" x-text="services.length"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card p-3 text-center">
+                                <h3>Total Projects</h3>
+                                <p class="fs-1 fw-bold text-success" x-text="projects.length"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Skills Management Tab -->
+                <div x-show="currentTab === 'skills'">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>Manage Skills</h2>
+                        <button class="btn btn-success" @click="openModal('skills')"><i class="fa-solid fa-plus"></i>
+                            Add Skill</button>
+                    </div>
+                    <div class="card p-3">
+                        <table class="table table-dark table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Skill Name</th>
+                                    <th>Percentage</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template x-for="(skill, index) in skills" :key="index">
+                                    <tr>
+                                        <td x-text="index + 1"></td>
+                                        <td x-text="skill.name"></td>
+                                        <td x-text="skill.percentage + '%'"></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger"
+                                                @click="deleteItem('skills', index)"><i class="fa-solid fa-trash"></i>
+                                                Delete</button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 3. Services Management Tab -->
+                <div x-show="currentTab === 'services'">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>Manage Services</h2>
+                        <button class="btn btn-success" @click="openModal('services')"><i class="fa-solid fa-plus"></i>
+                            Add Service</button>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <template x-for="service in services" :key="service.id">
+                            <div class="col">
+                                <div class="card h-100 p-3">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img :src="service.icon" style="width: 50px;" alt="Icon">
+                                        <div>
+                                            <h5 class="mb-1" x-text="service.title"></h5>
+                                            <p class="small text-muted mb-0" x-text="service.description"></p>
+                                        </div>
+                                    </div>
+                                    <div class="text-end mt-3">
+                                        <button class="btn btn-sm btn-danger"
+                                            @click="deleteItem('services', service.id)"><i
+                                                class="fa-solid fa-trash"></i> Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- 4. Projects Management Tab -->
+                <div x-show="currentTab === 'projects'">
+                    <div class="row g-4">
+
+                        <!-- Left Column: Add New Project Form -->
+                        <div class="col-lg-5">
+                            <div class="card p-3 border-success">
+                                <h4 class="fw-bold text-success mb-3"><i class="fa-solid fa-plus-circle me-2"></i>Add
+                                    New Project</h4>
+
+                                <form @submit.prevent="addProject">
+
+                                    <!-- Custom ID Input Field -->
+                                    <div class="mb-3">
+                                        <label class="form-label text-white">Project ID (Optional)</label>
+                                        <input type="number" x-model.number="newProject.id"
+                                            class="form-control bg-dark text-white border-secondary"
+                                            placeholder="Leave empty for auto-generated ID">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label text-white">Project Title</label>
+                                        <input type="text" x-model="newProject.title"
+                                            class="form-control bg-dark text-white border-secondary"
+                                            placeholder="e.g. E-Commerce Platform" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label text-white">Image Path</label>
+                                        <input type="text" x-model="newProject.image"
+                                            class="form-control bg-dark text-white border-secondary"
+                                            placeholder="e.g. images/1748939972.jpg" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label text-white">Description</label>
+                                        <textarea x-model="newProject.description"
+                                            class="form-control bg-dark text-white border-secondary" rows="3"
+                                            placeholder="Enter project description..." required></textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success w-100 fw-bold">Add Project to
+                                        List</button>
+                                </form>
+                            </div>
+
+                            <!-- Live JSON Output Box -->
+                            <div class="card p-3 border-success mt-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="fw-bold text-success mb-0"><i class="fa-solid fa-code me-2"></i>Updated
+                                        JSON Output</h5>
+                                    <button class="btn btn-outline-success btn-sm" @click="copyJson">Copy JSON</button>
+                                </div>
+                                <p class="small text-muted mb-2">Copy this JSON content without the outer array
+                                    brackets:</p>
+
+                                <!-- Outer brackets stripped out -->
+                                <textarea class="form-control bg-dark text-success font-monospace"
+                                    style="font-size: 12px;" rows="8" readonly x-text="getFormattedJson()"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Projects Display Grid -->
+                        <div class="col-lg-7">
+                            <h4 class="fw-bold mb-3">Project List (<span x-text="projects.length"></span>)</h4>
+                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                <template x-for="project in projects" :key="project.id">
+                                    <div class="col">
+                                        <div class="card h-100 p-3 bg-dark border-success">
+                                            <img :src="project.image" class="card-img-top mb-2"
+                                                style="height: 140px; object-fit: cover;" alt="Project Image">
+                                            <h5 class="text-white mb-1" x-text="project.title"></h5>
+                                            <p class="small text-muted mb-2" x-text="project.description"></p>
+                                            <div class="text-end mt-auto">
+                                                <button class="btn btn-sm btn-danger"
+                                                    @click="deleteItem('projects', project.id)">
+                                                    <i class="fa-solid fa-trash"></i> Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Files -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/alpine.min.js"></script>
+</body>
+
+</html>

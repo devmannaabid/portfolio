@@ -1,0 +1,9 @@
+[
+    {
+        "image": "images/profile.jpg",
+        "name": "Abid Islam",
+        "description": "I'm a web developer with a passion for creating dynamic and responsive web applications.",
+        "cv": "file/cv-resume.pdf",
+        "resume": "file/cv-resume.pdf"
+    }
+]

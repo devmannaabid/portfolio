@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "image": "images/1748939972.jpg",
+        "title": "E-Commerce Platform",
+        "description": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+    },
+    {
+        "id": 2,
+        "image": "images/1748939972.jpg",
+        "title": "Portfolio Management App",
+        "description": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+    },
+    {
+        "id": 3,
+        "image": "images/1748939972.jpg",
+        "title": "Task Automation Tool",
+        "description": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+    },
+    {
+        "id": 4,
+        "image": "images/1748939972.jpg",
+        "title": "Analytics Dashboard",
+        "description": "This is a longer card with supporting text below as a natural lead-in to additional content."
+    },
+    {
+        "id": 5,
+        "image": "images/1748939972.jpg",
+        "title": "Real-Time Chat Application",
+        "description": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+    },
+    {
+        "id": 6,
+        "title": "I-Global",
+        "image": "images/1748939972.jpg",
+        "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus sunt laboriosam alias iure, ipsum minima."
+    },
+    {
+        "id": 7,
+        "title": "news",
+        "image": "images/1748939972.jpg",
+        "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus sunt laboriosam alias iure, ipsum minima."
+    }
+]

@@ -1,0 +1,39 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    /* Prevent scrolling */
+}
+
+.scrollspy-example {
+    height: 100vh;
+    /* already applied */
+    overflow-y: auto;
+    scroll-behavior: smooth;
+
+    /* Scrollbar styling */
+    scrollbar-width: thin;
+    /* For Firefox */
+    scrollbar-color: #198754 #0d0d0d;
+    /* thumb color (success) and track (dark) */
+}
+
+/* For WebKit browsers (Chrome, Edge, Safari) */
+.scrollspy-example::-webkit-scrollbar {
+    width: 8px;
+    /* scrollbar width */
+}
+
+.scrollspy-example::-webkit-scrollbar-track {
+    background: #0d0d0d;
+    /* dark background */
+}
+
+.scrollspy-example::-webkit-scrollbar-thumb {
+    background-color: #198754;
+    /* Bootstrap success color */
+    border-radius: 10px;
+    border: 2px solid #0d0d0d;
+    /* optional border for better contrast */
+}
